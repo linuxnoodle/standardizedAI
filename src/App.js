@@ -19,9 +19,9 @@ class App extends Component {
     this.guidesRef = database.ref('/guides');
     this.userStorageRef = storage.ref('/user-files').child('Anonymous');
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFileSubmit = this.handleFileSubmit.bind(this);
     this.displayCurrentUser = this.displayCurrentUser.bind(this);
   }
 
@@ -50,6 +50,7 @@ class App extends Component {
         // Add user to users database if not exist
         this.userRef.once('value', (snapshot) => {
           const userData = snapshot.val();
+          console.dir(userData)
           if (!userData) {
             this.userRef.set({ name: currentUser.displayName });
           }
@@ -62,31 +63,25 @@ class App extends Component {
   }
 
   // Form Events
-  handleChange(event) {
-    const newData = event.target.value;
-    this.setState({ newData })
+  handleChangeUsername(event) {
+    const username = event.target.value;
+    this.setState({ username })
+  }
+
+  handleChangePassword(event){
+    const password = event.target.value;
+    this.setState({ password })
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { newData, currentUser } = this.state;
+    const { username, password } = this.state;
+    console.dir(this);
     this.guidesRef.push({
-      uid: currentUser.uid,
-      content: newData
+      username: username,
+      password: password
     });
-  }
-
-  handleFileSubmit(event) {
-    const file = event.target.files[0];
-    const uploadTask = this.userStorageRef.child(file.name).put(file, { contentType: file.type });
-
-    uploadTask.on('state_changed', (snapshot) => {
-      console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%');
-    });
-
-    uploadTask.then((snapshot) => {
-      this.userRef.child('images').push(snapshot.downloadURL);
-    });
+    console.log("user: " + username + "\npassword: " + password)
   }
 
   // Auth Events
@@ -105,19 +100,6 @@ class App extends Component {
     />
   }
 
-  displayUserImages() {
-    const { userImages } = this.state;
-    if (userImages) {
-      const imageIds = Object.keys(userImages);
-      return imageIds.map((id) => <img
-        key={id}
-        className="App-image"
-        src={userImages[id]}
-        alt=""
-      />);
-    }
-  }
-
   render() {
     return (
       <div className="App">
@@ -134,8 +116,8 @@ class App extends Component {
         </p>
         <div className="AppBody">
           <form className="App-form" onSubmit={this.handleSubmit}>
-            <input className="text" name="name" placeholder="Username" type="text" onChange={this.handleChange} />
-            <input className="text" name="name" placeholder="Password" type="text" onChange={this.handleChange} />
+            <input className="text" name="username" placeholder="Username" type="text" onChange={this.handleChangeUsername} />
+            <input className="text" name="password" placeholder="Password" type="text" onChange={this.handleChangePassword} />
             <input className="button" type="submit" value="Submit" />
           </form>
           <pre className="AppBody-fb-db">{JSON.stringify(this.state.guides, null, 2)}</pre>
