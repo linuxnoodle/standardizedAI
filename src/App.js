@@ -1,6 +1,6 @@
 // Code taken from https://github.com/jeescu/react-firebase
 import React, { Component } from 'react';
-import { database, auth, googleAuthProvider, storage } from './firebase';
+import { database, auth, googleAuthProvider } from './firebase';
 import registerMessaging from './request-messaging-permission';
 import './App.css';
 
@@ -17,7 +17,6 @@ class App extends Component {
 
     this.userRef = database.ref('/users').child('Anonymous');
     this.guidesRef = database.ref('/guides');
-    this.userStorageRef = storage.ref('/user-files').child('Anonymous');
 
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -32,7 +31,6 @@ class App extends Component {
       if (currentUser) {
         // Init current user Refs
         this.userRef = database.ref('/users').child(currentUser.uid);
-        this.userStorageRef = storage.ref('/user-files').child(currentUser.uid);
 
         this.guidesRef.on('value', (snapshot) => {
           const guides = snapshot.val();
@@ -112,7 +110,7 @@ class App extends Component {
         </div>
 
         <p className="App-intro">
-          <code><b>Database</b></code>
+          <code><b>Login</b></code>
         </p>
         <div className="AppBody">
           <form className="App-form" onSubmit={this.handleSubmit}>
@@ -120,12 +118,7 @@ class App extends Component {
             <input className="text" name="password" placeholder="Password" type="text" onChange={this.handleChangePassword} />
             <input className="button" type="submit" value="Submit" />
           </form>
-          <pre className="AppBody-fb-db">{JSON.stringify(this.state.guides, null, 2)}</pre>
         </div>
-
-        <p className="App-intro">
-          <code><b>Cloud Storage</b></code>
-        </p>
         </div>
     );
   }
