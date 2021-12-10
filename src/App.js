@@ -2,9 +2,6 @@
 import React, { Component } from 'react';
 import { database, auth, googleAuthProvider, storage } from './firebase';
 import registerMessaging from './request-messaging-permission';
-
-import reactLogo from './react-logo.svg';
-import firebaseLogo from './firebase-logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -125,13 +122,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-nav">
-          <span className="App-nav-title">React + Firebase Setup</span>
+          <span className="App-nav-title">standardizedAI</span>
           <span className="App-nav-button">{this.state.currentUser.email ? this.displayCurrentUser() : <a href="#" onClick={this.signIn}>Sign In</a>}</span>
         </div>
         <div className="App-header">
-          <img src={reactLogo} className="main-logo" alt="logo" />
-          <img src={firebaseLogo} className="main-logo" alt="logo" />
-          <h2>Welcome to React and Firebase</h2>
+
         </div>
 
         <p className="App-intro">
