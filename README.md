@@ -11,7 +11,7 @@
 - Clone project and install dependencies.
 ```
 > git clone 
-> cd react-firebase
+> cd standardizedAI
 > yarn
 ```
 
@@ -40,7 +40,7 @@ Pushing the new data will also add the current User id, who created the data.
 ```
 3. CD to your working project and initialize firebase.
 ```
-> cd react-firebase
+> cd standardizedAI
 > firebase init
 ```
 4. Configure firebase:
