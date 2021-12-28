@@ -1,16 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import './index.css';
-
-import { messaging } from './firebase';
+import App from './App';
 
 ReactDOM.render(
-  <App />,
+  <React.StrictMode>
+    <App/>
+  </React.StrictMode>,
   document.getElementById('root')
 );
-
-// logging our messaging notification
-messaging.onMessage(payload => {
-  console.log(payload);
-})
