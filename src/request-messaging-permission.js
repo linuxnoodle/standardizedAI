@@ -1,4 +1,4 @@
-import { database, messaging } from './firebase';
+import { database, messaging } from './database';
 
 export default function(user) {
  messaging.requestPermission()

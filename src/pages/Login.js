@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { database, auth, googleAuthProvider } from '../firebase';
+import { database, auth, googleAuthProvider } from '../database';
 import registerMessaging from '../request-messaging-permission';
 import '../App.css';
 
