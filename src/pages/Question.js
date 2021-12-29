@@ -96,7 +96,12 @@ class Question extends Component {
     return (
         <div className="App">
         <div className="App-nav">
-          <span className="App-nav-title">standardizedAI</span>
+        <span className="App-nav-title"><a href="/">standardizedAI</a></span>
+          <ul class="App-navbar">
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Register</a></li>
+              <li><a href="/question">Questions</a></li>
+          </ul>
           <span className="App-nav-button">{this.state.currentUser.email ? this.displayCurrentUser() : <a href="#" onClick={this.signIn}>Sign In With Google</a>}</span>
         </div>
         <div className="AppBody">

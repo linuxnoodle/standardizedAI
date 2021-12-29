@@ -18,6 +18,17 @@
   color: white;
 }
 
+.App-navbar{
+  margin: auto;
+  list-style-type: none;
+}
+
+.App-navbar li{
+  max-height: 22px;
+  float: left;
+  margin-left: 18rem;
+}
+
 .App-nav-title {
   float: left;
 }
