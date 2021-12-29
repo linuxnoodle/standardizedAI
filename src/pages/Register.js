@@ -85,15 +85,23 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { username, password, email, confirmPassword } = this.state;
-    console.dir(this);
-    console.log("email: " + email + "\nuser: " + username + "\npassword: " + password)
-    this.guidesRef.push({
-      username: username,
-      password: password,
-      email: email,
-      confirmPassword: confirmPassword
+    if (password === confirmPassword){
+      console.log("Password Match");
+      console.dir(this);
+      console.log("email: " + email + "\nuser: " + username + "\npassword: " + password)
+      this.guidesRef.push({
+        username: username,
+        password: password,
+        email: email,
+        confirmPassword: confirmPassword
     });
-    
+    window.location.href = "/question"
+  }
+    else{
+      const error = document.getElementById('error')
+      error.textContent = "\nError: Password Mismatch"
+      error.style.color = "red"
+    }
   }
 
   // Auth Events
@@ -138,6 +146,7 @@ class Login extends Component {
             <input className="text" name="password" placeholder="Password" type="text" onChange={this.handleChangePassword} />
             <input className="text" name="confirmPassword" placeholder="Confirm Password" type="text" onChange={this.handleConfirmPassword} />
             <input className="button" type="submit" value="Submit" />
+            <span id="error"></span>
           </form>
         </div>
         </div>
