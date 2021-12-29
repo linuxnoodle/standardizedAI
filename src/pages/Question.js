@@ -12,7 +12,7 @@ function parse_data(string, idx){
     for(var element of selected.split('|')){
         //console.log(element.replace("<>","\n"));
         console.log(element.indexOf('<>'));
-        result+=element.replace(/<>/g,"\n")+'\n';
+        result+=element.replace(/<>/g,'\n')+'\n';
     }
     return result;
 }
@@ -104,9 +104,7 @@ class Question extends Component {
           </ul>
           <span className="App-nav-button">{this.state.currentUser.email ? this.displayCurrentUser() : <a href="#" onClick={this.signIn}>Sign In With Google</a>}</span>
         </div>
-        <div className="AppBody">
             <p id="display"></p>
-        </div>
         </div>
 
     );

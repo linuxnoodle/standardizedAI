@@ -37,6 +37,14 @@
   float: right;
 }
 
+#display{
+    width: 45%;
+    white-space: pre;
+    text-align: left;
+    display: inline-block;
+    margin: 0 auto;
+}
+
 .App-nav-img {
   cursor: pointer;
   height: 45px;
