@@ -70,6 +70,17 @@ class Login extends Component {
   handleChangeEmail(event){
     const email = event.target.value;
     this.setState({ email })
+    email.trim()
+    const error= document.getElementById('emailError')
+    const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ 
+    if (email.match(validEmail)) {
+        console.log('valid email')
+        error.textContent = ""
+    }
+    else{
+      error.textContent = "Error: Invalid Email"
+      error.style.color = "red"
+    }
   }
 
   handleConfirmPassword(event){
@@ -84,7 +95,7 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { username, password, email, confirmPassword } = this.state;
+    const { username, password, email, confirmPassword} = this.state;
     if (password === confirmPassword){
       console.log("Password Match");
       console.dir(this);
@@ -98,7 +109,7 @@ class Login extends Component {
     window.location.href = "/question"
   }
     else{
-      const error = document.getElementById('error')
+      const error = document.getElementById('passwordError')
       error.textContent = "\nError: Password Mismatch"
       error.style.color = "red"
     }
@@ -142,11 +153,12 @@ class Login extends Component {
         <div className="AppBody">
           <form className="App-form" onSubmit={this.handleSubmit}>
             <input className="text" name="email" placeholder="Enter Valid Email" type="text" onChange={this.handleChangeEmail} />
+            <span id="emailError"></span>
             <input className="text" name="username" placeholder="Username" type="text" onChange={this.handleChangeUsername} />
             <input className="text" name="password" placeholder="Password" type="text" onChange={this.handleChangePassword} />
             <input className="text" name="confirmPassword" placeholder="Confirm Password" type="text" onChange={this.handleConfirmPassword} />
             <input className="button" type="submit" value="Submit" />
-            <span id="error"></span>
+            <span id="passwordError"></span>
           </form>
         </div>
         </div>
