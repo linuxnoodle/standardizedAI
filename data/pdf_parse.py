@@ -1,7 +1,10 @@
 #you need to have the following dependencies to make it work
 #sudo apt install build-essential libpoppler-cpp-dev pkg-config python3-dev
 #pip install pdftotext
-import pdftotext as pdt
+try:
+    import pdftotext as pdt
+except ImportError:
+    print("could not import because you didnt install it")
 
 def recombine_split(x):
     recombined = ''
